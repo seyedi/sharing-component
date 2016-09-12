@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<!--[if IE 7]>         <html lang="fa"  class="lt-ie10 lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="fa"  class="lt-ie10 lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html lang="fa"  class="lt-ie10"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html dir="rtl">
+<!--<![endif]-->
+
+<head>
+  <title>Sharing Component</title>
+  <meta charset="utf-8" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+  <meta name="description" content="Sharing Component from css-tricks.ir" />
+  <meta name="author" content="css-tricks.ir" />
+
+  <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
+
+  <link rel="stylesheet" type="text/css" href="css/demo.css" />
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
+
+  <!--[if IE]>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+  <div class="demo-top-bar">
+    <a href="" target="_blank">خواندن مقاله مربوط به این دمو</a>
+    <a href="https://github.com/seyedi/sharing-component" target="_blank">مشارکت در گیتهاب <i class="fa fa-github"></i></a>
+  </div>
+
+  <a class="share-button js-share-button" href="#"><i class="fa fa-share icon" aria-hidden="true"></i></a>
+
+
+  <div class="share-modal share-modal--close" >
+    <div class="share-body">
+      <a class="share-modal__close" href="#" id="closeModalButton">
+        <i class="fa fa-close icon" aria-hidden="true"></i>
+      </a>
+      <p class="share-modal__title">
+        <span>انتشار مطلب</span>
+        <i class="fa fa-share icon" aria-hidden="true"></i>
+      </p>
+      <p class="share-modal__post-title">عنوان مطلب</p>
+
+      <div class="share-buttons-container">
+        <a class="twitter"  href="#" target="_blank"><i class="fa fa-twitter icon" aria-hidden="true"></i></a>
+        <a class="facebook"  href="#" target="_blank"><i class="fa fa-facebook icon" aria-hidden="true"></i></a>
+        <a class="google-plus" href="#" target="_blank"><i class="fa fa-google-plus icon" aria-hidden="true"></i></a>
+        <a class="linkedin"  href="#" target="_blank"><i class="fa fa-linkedin icon" aria-hidden="true"></i></a>
+        <a class="telegram"  href="#" target="_blank"><i class="fa fa-paper-plane icon" aria-hidden="true"></i></a>
+      </div>
+
+      <p class="share-modal__post-title share-modal__post-title--small">آدرس کوتاه شده این مطلب</p>
+      <input type="text" readonly="" class="share-modal__link-box" value="css-tricks.ir/kootah-shode:P" onClick="this.select();">
+    </div>
+  </div>
+
+
+  <script type="text/javascript" src="js/jquery-1.9.0.min.js"></script>
+  <script type="text/javascript">
+    var $shareModal = $('.share-modal');
+
+    var toggleModal = function() {
+      $shareModal.toggleClass('share-modal--open');
+      $shareModal.toggleClass('share-modal--close');
+    }
+
+    $('.js-share-button').on('click', function(e) {
+        e.preventDefault();
+        toggleModal();
+    });
+
+    $(document).keyup(function(e) {
+        if (e.keyCode === 27 && $shareModal.hasClass('share-modal--open')) {
+          $shareModal.removeClass('share-modal--open');
+          $shareModal.addClass('share-modal--close');
+        }
+    });
+
+    $('#closeModalButton').on('click', function(e) {
+        e.preventDefault();
+        toggleModal();
+    });
+  </script>
+</body>
+</html>
+
+
+
+<!-- function social_sharing_buttons() {
+  $siteURL = site_url();
+  // Get current page URL
+  // $permalink = get_permalink();
+  $pageURL = wp_get_shortlink();
+
+  // Get current page title
+  $pageTitle = str_replace( ' ', '%20', get_the_title());
+
+  // Get Post Thumbnail for pinterest
+  $pageThumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'full' );
+
+  // Construct sharing URL without using any script
+  $twitterURL = 'https://twitter.com/intent/tweet?text='.$pageTitle.'&amp;url='.$pageURL.'&amp;via=CSSTricksIr';
+  $facebookURL = 'https://facebook.com/sharer/sharer.php?u='.$pageURL;
+  $googleURL = 'https://plus.google.com/share?url='.$pageURL;
+  $linkedinURL = 'https://www.linkedin.com/shareArticle?mini=true&url='.$pageURL.'&title='.$pageTitle.'&source='.$siteURL;
+  $telegramURL = 'https://telegram.me/share/url?url='.$pageURL.'&text='.$pageTitle;
+
+  // Add sharing button at the end of page/page content
+  $content = '<div class="share-modal share-modal--close" >
+  <div class="share-body">
+    <a class="share-modal__close" href="#" id="closeModalButton">
+      <svg class="icon icon-cross" width=".65em" height=".65em"><use xlink:href="'.get_bloginfo('template_url').'/symbol-defs.svg#icon-cross"></use></svg>
+    </a>
+    <p class="share-modal__title">
+      <span>انتشار مطلب</span>
+      <svg class="icon icon-share2" width="1em" height="1em"><use xlink:href="'.get_bloginfo('template_url').'/symbol-defs.svg#icon-share2"></use></svg>
+    </p>
+    <p class="share-modal__post-title">'.urldecode($pageTitle).'</p>
+
+    <div class="share-buttons-container">
+      <a class="twitter" href="'.$twitterURL .'" target="_blank"><svg class="icon icon-twitter" width="1.5em" height="1.5em"><use xlink:href="'.get_bloginfo('template_url').'/symbol-defs.svg#icon-twitter"></use></svg></a>
+      <a class="facebook" href="'.$facebookURL.'" target="_blank"><svg class="icon icon-facebook" width="1.5em" height="1.5em"><use xlink:href="'.get_bloginfo('template_url').'/symbol-defs.svg#icon-facebook"></use></svg></a>
+      <a class="google-plus" href="'.$googleURL.'" target="_blank"><svg class="icon icon-google-plus" width="1.5em" height="1.5em"><use xlink:href="'.get_bloginfo('template_url').'/symbol-defs.svg#icon-google-plus"></use></svg></a>
+      <a class="linkedin" href="'.$linkedinURL.'" target="_blank"><svg class="icon icon-linkedin2" width="1.5em" height="1.5em"><use xlink:href="'.get_bloginfo('template_url').'/symbol-defs.svg#icon-linkedin2"></use></svg></a>
+      <a class="telegram" href="'.$telegramURL.'" target="_blank"><svg class="icon icon-telegram" width="1.5em" height="1.5em"><use xlink:href="'.get_bloginfo('template_url').'/symbol-defs.svg#icon-telegram"></use></svg></a>
+    </div>
+
+    <p class="share-modal__post-title share-modal__post-title--small">آدرس کوتاه شده این مطلب</p>
+    <input type="text" readonly="" class="share-modal__link-box" value="'.$pageURL.'" onClick="this.select();">
+  </div>
+</div>';
+
+  return $content;
+}; -->

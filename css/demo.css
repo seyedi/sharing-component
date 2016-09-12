@@ -1,0 +1,54 @@
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: inherit;
+}
+
+body {
+  font-family: tahoma;
+  padding-top: 30px;
+  height: 100vh;
+}
+
+.demo-top-bar {
+  font-family: tahoma;
+  direction: rtl;
+  background-color: #333;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.demo-top-bar a {
+  display: inline-block;
+  font-size: .8em;
+  padding: .5em 1em;
+  color: #eee;
+  text-decoration: none;
+  transition: all .2s;
+}
+
+.demo-top-bar a i {
+  font-size: 1.4em;
+}
+
+.demo-top-bar a:hover {
+  background-color: #555;
+  color: #fff;
+}
+
+.share-button {
+  display: block;
+  width: 2em;
+  height: 2em;
+  margin: 0 auto;
+  font-size: 2em;
+  position: relative;
+  top: 50%;
+}
